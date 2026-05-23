@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>For You ❤️</title>
 
@@ -12,14 +12,14 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 body{
-    background:black;
     overflow:hidden;
     height:100vh;
-    color:white;
+    transition:1.5s ease;
+    background:#f5ebe0;
 }
 
 /* Screens */
@@ -35,28 +35,39 @@ body{
     transition:1s ease;
 }
 
-/* First Screen */
-
-#screen1{
-    background:
-    linear-gradient(to bottom,
-    rgba(0,0,0,0.4),
-    rgba(0,0,0,0.9));
-}
-
-/* Second Screen */
+/* Romantic second screen */
 
 #screen2{
-    background:black;
     opacity:0;
     pointer-events:none;
+
+    background:
+    radial-gradient(circle at center,
+    #5a001d,
+    #220010,
+    #120008);
+
+    transition:1.5s ease;
 }
 
-/* Active screen */
+/* Hearts behind content */
 
-.show{
-    opacity:1 !important;
-    pointer-events:auto !important;
+.hearts{
+    position:absolute;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    z-index:0;
+}
+
+/* Main content above hearts */
+
+.content{
+    position:relative;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
 /* Henry media */
@@ -64,14 +75,14 @@ body{
 .henry{
     width:320px;
     max-width:85%;
-    border-radius:22px;
+    border-radius:24px;
+
     opacity:0;
     animation:fadeImage 2s forwards;
+
     box-shadow:
     0 0 30px rgba(255,255,255,0.15),
     0 0 80px rgba(255,0,100,0.15);
-
-    transform:scale(0.95);
 }
 
 /* Text */
@@ -79,18 +90,23 @@ body{
 .text{
     margin-top:22px;
     text-align:center;
+    color:white;
     opacity:0;
     padding:0 20px;
 }
 
 #text1{
-    font-size:2.2rem;
+    font-size:2.3rem;
+    color:#2d1e2f;
+
     animation:fadeText 2s forwards;
     animation-delay:2s;
 }
 
 #text2{
-    font-size:1.4rem;
+    font-size:1.3rem;
+    color:#5c374c;
+
     animation:fadeText 2s forwards;
     animation-delay:5s;
 }
@@ -100,19 +116,25 @@ body{
 button{
     margin-top:35px;
     padding:14px 34px;
+
     border:none;
     border-radius:50px;
-    background:#ff2e63;
+
+    background:#d63384;
     color:white;
+
     font-size:1.1rem;
     cursor:pointer;
+
     opacity:0;
 
     animation:fadeText 2s forwards;
     animation-delay:8s;
 
     transition:0.3s ease;
-    box-shadow:0 0 20px rgba(255,46,99,0.5);
+
+    box-shadow:
+    0 0 20px rgba(214,51,132,0.4);
 }
 
 button:hover{
@@ -123,16 +145,19 @@ button:hover{
 
 .finalText{
     font-size:3rem;
-    text-align:center;
     margin-top:25px;
 
+    color:white;
+    text-align:center;
+
     opacity:0;
+
     animation:dramaticText 1.5s forwards;
     animation-delay:0.5s;
 
     text-shadow:
-    0 0 10px rgba(255,255,255,0.4),
-    0 0 25px rgba(255,0,120,0.6);
+    0 0 12px rgba(255,255,255,0.4),
+    0 0 25px rgba(255,0,100,0.7);
 }
 
 /* Hearts */
@@ -140,14 +165,25 @@ button:hover{
 .heart{
     position:absolute;
     bottom:-20px;
+
     color:#ff4d6d;
+
     animation:float linear infinite;
-    opacity:0.7;
+
+    opacity:0.5;
+
+    z-index:0;
 }
 
 /* Animations */
 
 @keyframes fadeImage{
+
+    from{
+        opacity:0;
+        transform:scale(0.9);
+    }
+
     to{
         opacity:1;
         transform:scale(1);
@@ -155,12 +191,14 @@ button:hover{
 }
 
 @keyframes fadeText{
+
     to{
         opacity:1;
     }
 }
 
 @keyframes dramaticText{
+
     from{
         opacity:0;
         transform:scale(0.7);
@@ -173,9 +211,10 @@ button:hover{
 }
 
 @keyframes float{
+
     from{
         transform:translateY(0);
-        opacity:0.8;
+        opacity:0.5;
     }
 
     to{
@@ -188,8 +227,12 @@ button:hover{
 
 @media(max-width:600px){
 
+    .henry{
+        width:290px;
+    }
+
     #text1{
-        font-size:1.8rem;
+        font-size:2rem;
     }
 
     #text2{
@@ -197,9 +240,9 @@ button:hover{
     }
 
     .finalText{
-        font-size:2.2rem;
+        font-size:2.5rem;
+        padding:0 20px;
     }
-
 }
 
 </style>
@@ -209,27 +252,31 @@ button:hover{
 
 <!-- SCREEN 1 -->
 
-<div id="screen1" class="screen show">
+<div id="screen1" class="screen">
 
-    <!-- USE GIF / WEBP HERE -->
+    <div class="hearts" id="hearts1"></div>
 
-    <img
-        class="henry"
-        src="henry1.webp"
-        alt="Henry Cavill"
-    />
+    <div class="content">
 
-    <div id="text1" class="text">
-        hey gorgeous ❤️
+        <img
+            class="henry"
+            src="henry1.webp"
+            alt="Henry Cavill"
+        >
+
+        <div id="text1" class="text">
+            hey gorgeous ❤️
+        </div>
+
+        <div id="text2" class="text">
+            Heard you were feeling a bit down
+        </div>
+
+        <button onclick="showSecondScreen()">
+            Press Me
+        </button>
+
     </div>
-
-    <div id="text2" class="text">
-        Heard you were feeling a bit down
-    </div>
-
-    <button onclick="showSecondScreen()">
-        Press Me
-    </button>
 
 </div>
 
@@ -237,49 +284,67 @@ button:hover{
 
 <div id="screen2" class="screen">
 
-    <!-- USE WEBP / GIF HERE -->
+    <div class="hearts" id="hearts2"></div>
 
-    <img
-        class="henry"
-        src="henry2.gif"
-        alt="Henry Cavill"
-    />
+    <div class="content">
 
-    <div class="finalText">
-        How about now 😏
+        <img
+            class="henry"
+            src="Henry2.gif"
+            alt="Henry Cavill"
+        >
+
+        <div class="finalText">
+            How about now 😏
+        </div>
+
     </div>
 
 </div>
 
 <script>
 
-/* Floating hearts */
+/* Create hearts */
 
-for(let i=0;i<30;i++){
+function createHearts(containerId){
 
-    const heart=document.createElement("div");
+    const container =
+        document.getElementById(containerId);
 
-    heart.classList.add("heart");
+    for(let i=0;i<30;i++){
 
-    heart.innerHTML="❤️";
+        const heart =
+            document.createElement("div");
 
-    heart.style.left=Math.random()*100+"vw";
+        heart.classList.add("heart");
 
-    heart.style.fontSize=
-        (15+Math.random()*25)+"px";
+        heart.innerHTML="❤️";
 
-    heart.style.animationDuration=
-        (4+Math.random()*5)+"s";
+        heart.style.left =
+            Math.random()*100+"vw";
 
-    heart.style.animationDelay=
-        Math.random()*5+"s";
+        heart.style.fontSize =
+            (15+Math.random()*25)+"px";
 
-    document.body.appendChild(heart);
+        heart.style.animationDuration =
+            (5+Math.random()*5)+"s";
+
+        heart.style.animationDelay =
+            Math.random()*5+"s";
+
+        container.appendChild(heart);
+    }
 }
 
-/* Switch screen */
+createHearts("hearts1");
+createHearts("hearts2");
+
+/* Switch screens */
 
 function showSecondScreen(){
+
+    document.body.style.background =
+    "#120008";
 
     const screen1 =
         document.getElementById("screen1");
@@ -293,10 +358,10 @@ function showSecondScreen(){
 
         screen1.style.display="none";
 
-        screen2.classList.add("show");
+        screen2.style.opacity="1";
+        screen2.style.pointerEvents="auto";
 
     },800);
-
 }
 
 </script>
